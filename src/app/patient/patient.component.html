@@ -1,0 +1,85 @@
+<h2>Hospital Billing System</h2>
+
+<div class="row">
+  <div class="col-md-5">
+    <form autocomplete="off" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+
+      <!-- name  -->
+
+      <div class="mb-2">
+        <label> Name</label>
+        <input type="text" name="name" class="form-control"
+      [(ngModel)]="patientService.patientData.name" #name="ngModel" autocomplete="off"
+      required minlength="3" pattern="^[a-zA-Z]{1,30}$"
+      [class.is-invalid]="name.touched && name.invalid">
+    </div>
+
+    <!--Validation-->
+    <div *ngIf="myForm.submitted || name.touched && name.invalid">
+      <div class="text-danger" *ngIf="name.errors?.['required']">
+       Name is mandatory</div>
+       </div>
+
+<!-- age -->
+      <div class="mb-2">
+        <label>Age</label>
+        <input type="text" name="age" class="form-control" [(ngModel)]="patientService.patientData.age"
+          #age="ngModel" required [class.is-invalid]="age.invalid && age.touched">
+      </div>
+
+
+        <!-- validation  -->
+        <div *ngIf="myForm.submitted || age.touched && age.invalid">
+          <div class="text-danger" *ngIf="age.errors?.['required']">
+           Age is mandatory</div>
+          </div>
+
+<!-- address  -->
+      <div class="mb-2">
+        <label>Address</label>
+        <input type="text" name="address" class="form-control"
+          [(ngModel)]="patientService.patientData.address" #address="ngModel" required
+          [class.is-invalid]="address.invalid && address.touched">
+      </div>
+
+      <!-- validation  -->
+      <div *ngIf="myForm.submitted || age.touched && age.invalid">
+        <div class="text-danger" *ngIf="age.errors?.['required']">
+         Address is mandatory</div>
+        </div>
+
+
+<!-- email -->
+      <div class="mb-2">
+        <label>Email ID</label>
+        <input type="email" class="form-control" name="emailId"
+      [(ngModel)]="patientService.patientData.emailId" #emailId="ngModel"
+      autocomplete="off" required  pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      [class.is-invalid]="emailId.touched && emailId.invalid">
+    </div>
+
+    <!--Validation-->
+    <div *ngIf="myForm.submitted || emailId.touched && emailId.invalid">
+      <div class="text-danger" *ngIf="emailId.errors?.['required']">
+      Email ID is Mandatory</div>
+      </div>
+
+
+
+
+<!-- date of admission -->
+
+      <div class="mb-2">
+        <label>Date of Admission</label>
+        <input type="datetime" name="admissionDate" class="form-control" [(ngModel)]="patientService.patientData.admissionDate"
+          #admissionDate="ngModel" required [class.is-invalid]="admissionDate.invalid && admissionDate.touched">
+      </div>
+
+      <div class="mb-2">
+        <button type="submit" [disabled]="!myForm.valid"   class="btn btn-dark">Submit</button>
+        <button type="reset" class="btn btn-danger mx-2">Reset</button>
+      </div>
+
+    </form>
+  </div>
+</div>
